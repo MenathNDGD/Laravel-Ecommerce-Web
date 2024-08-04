@@ -21,3 +21,9 @@ route::get('/redirect', [HomeController::class, 'redirect']);
 route::get('/view_category', [AdminController::class, 'view_category']);
 
 route::post('/add_category', [AdminController::class, 'add_category']);
+
+route::get('/delete_category/{id}', [AdminController::class, 'delete_category']);
+
+route::get('/add_product', [AdminController::class, 'add_product']);
+
+route::post('/add_product_items', [AdminController::class, 'add_product_items']);
