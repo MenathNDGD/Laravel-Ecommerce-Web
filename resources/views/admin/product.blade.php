@@ -195,7 +195,6 @@
                       name="discount_price"
                       class="input_color"
                       placeholder="Add a Discount Price"
-                      required
                     >
                 </div>
   
