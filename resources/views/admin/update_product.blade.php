@@ -208,7 +208,6 @@
                       name="discount_price"
                       class="input_color"
                       placeholder="Add a Discount Price"
-                      required
                       value="{{$product->discount_price}}"
                     >
                 </div>
