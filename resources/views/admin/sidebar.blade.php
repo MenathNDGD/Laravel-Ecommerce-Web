@@ -8,7 +8,7 @@
       <div class="profile-desc">
         <div class="profile-pic">
           <div class="count-indicator">
-            <img class="img-xs rounded-circle " src="admin/assets/images/faces/face15.jpg" alt="">
+            <img class="img-xs rounded-circle" src="admin/assets/images/faces/face15.jpg" alt="">
             <span class="count bg-success"></span>
           </div>
           <div class="profile-name">
@@ -32,7 +32,7 @@
           <a href="#" class="dropdown-item preview-item">
             <div class="preview-thumbnail">
               <div class="preview-icon bg-dark rounded-circle">
-                <i class="mdi mdi-onepassword  text-info"></i>
+                <i class="mdi mdi-onepassword text-info"></i>
               </div>
             </div>
             <div class="preview-item-content">
@@ -67,24 +67,46 @@
     <li class="nav-item menu-items">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <span class="menu-icon">
-          <i class="mdi mdi-shopping"></i>
+          <i class="mdi mdi-package-variant"></i>
         </span>
         <span class="menu-title">Products</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{url('add_product')}}">Add Products</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{url('view_product')}}">View Products</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('add_product')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-plus-circle"></i>
+              </span>
+              <span class="menu-title">Add Products</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('view_product')}}">
+              <span class="menu-icon">
+                <i class="mdi mdi-eye"></i>
+              </span>
+              <span class="menu-title">View Products</span>
+            </a>
+          </li>
         </ul>
       </div>
     </li>
     <li class="nav-item menu-items">
       <a class="nav-link" href="{{url('view_category')}}">
         <span class="menu-icon">
-          <i class="mdi mdi-playlist-play"></i>
+          <i class="mdi mdi-grid"></i>
         </span>
         <span class="menu-title">Category</span>
+      </a>
+    </li>
+    <li class="nav-item menu-items">
+      <a class="nav-link" href="{{url('view_orders')}}">
+        <span class="menu-icon">
+          <i class="mdi mdi-cart-outline"></i>
+        </span>
+        <span class="menu-title">Orders</span>
       </a>
     </li>
   </ul>
