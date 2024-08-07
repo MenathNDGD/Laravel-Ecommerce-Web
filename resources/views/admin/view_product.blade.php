@@ -105,8 +105,8 @@
                   <td>{{$product->description}}</td>
                   <td>{{$product->quantity}}</td>
                   <td>{{$product->category}}</td>
-                  <td>{{$product->price}}</td>
-                  <td>{{$product->discount_price}}</td>
+                  <td>${{number_format($product->price, 2)}}</td>
+                  <td>${{number_format($product->discount_price, 2)}}</td>
                   <td><img src="/product/{{$product->image}}" alt="Product Image"></td>
                   <td>
                     <a 
