@@ -294,8 +294,6 @@
           </div>
         </div>
 
-    </div>
-
       <!-- footer start -->
       @include('home.footer')
       <!-- footer end -->
@@ -307,6 +305,9 @@
          
          </p>
       </div>
+
+    </div>
+
       <!-- jQery -->
       <script src="home/js/jquery-3.4.1.min.js"></script>
       <!-- popper js -->
