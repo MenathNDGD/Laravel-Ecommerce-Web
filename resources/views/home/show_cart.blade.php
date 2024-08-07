@@ -125,22 +125,23 @@
       <!-- header section starts -->
       @include('home.header')
       <!-- end header section -->
+
+      @if (session()->has('message'))
+         <div class="alert alert-success">
+            <button 
+               type="button" 
+               class="close" 
+               data-dismiss="alert" 
+               aria-hidden="true"
+            >
+               x
+            </button>
+               {{session()->get('message')}}
+         </div>
+      @endif
+
       <div>
          <table class="table table-bordered cart-table">
-            @if (session()->has('message'))
-                <div class="alert alert-success">
-                    <button 
-                      type="button" 
-                      class="close" 
-                      data-dismiss="alert" 
-                      aria-hidden="true"
-                    >
-                      x
-                    </button>
-                    {{session()->get('message')}}
-                </div>
-            @endif
-
             <thead>
                <tr>
                   <th>Title</th>
@@ -181,8 +182,8 @@
 
          <div class="proceed-to-payment">
             <h1>Proceed to Payment</h1>
-            <a href="" class="btn btn-dark">Cash on Delivery</a>
-            <a href="" class="btn btn-dark">Card Payment</a>
+            <a href="{{url('cash_order')}}" class="btn btn-dark">Cash on Delivery</a>
+            <a href="{{url('stripe', $totalPrice)}}" class="btn btn-dark">Card Payment</a>
          </div>
 
       </div>
