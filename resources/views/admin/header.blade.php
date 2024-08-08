@@ -147,6 +147,8 @@
             <div class="dropdown-divider"></div>
             <p class="p-3 mb-0 text-center">See all notifications</p>
           </div>
+
+        <!-- Admin button -->
         </li>
         <li>
           <x-app-layout></x-app-layout>
