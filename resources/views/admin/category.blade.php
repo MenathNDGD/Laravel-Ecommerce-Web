@@ -172,7 +172,7 @@
                   <thead>
                     <tr>
                       <th>Category Name</th>
-                      <th>Action</th>
+                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
