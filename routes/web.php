@@ -41,6 +41,8 @@ route::get('redirect', [HomeController::class, 'redirect']);
 
 route::get('/', [HomeController::class, 'index']);
 
+route::get('/product_details/{id}', [HomeController::class, 'product_details']);
+
 # Admin Controller Routes
 route::get('/view_category', [AdminController::class, 'view_category']);
 
