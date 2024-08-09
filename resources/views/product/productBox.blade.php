@@ -14,16 +14,7 @@
       align-items: center;
       padding-top: 15px;
       text-transform: none;
-   }
-   
-   .amountAdd {
-      margin: 0;
-      border-radius: 30px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      text-align: center;
       width: 100%;
-      box-sizing: border-box;
    }
    
    .amountAdd:focus {
@@ -32,25 +23,42 @@
       box-shadow: 0 0 5px rgba(92, 184, 92, 0.5);
    }
    
+   .input-group {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+   }
+
+   .amountAdd {
+      margin: 0;
+      border-radius: 30px;
+      border: 1px solid #080808;
+      font-size: 16px;
+      text-align: center;
+      width: 70px;
+      height: 36px;
+      box-sizing: border-box;
+   }
+
    .option2 {
       border-radius: 30px;
-      padding: 10px 20px;
+      padding: 20px 20px;
       background-color: #5cb85c;
       border: none;
       color: #fff;
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      width: 100%;
+      margin-left: 10px;
+      height: 36px;
       box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
    }
-   
+
    .option2:hover {
       background-color: #4cae4c;
-   }
-   
-   .option2:active {
-      background-color: #449d44;
    }
    
    .option1 {
@@ -132,9 +140,10 @@
                          <a href="{{url('product_details', $product->id)}}" class="option1">
                              {{$product->title}}
                          </a>
-                         <a href="" class="option2">
-                            Buy Now
-                         </a>
+                         <div class="input-group">
+                            <input type="number" class="amountAdd" min="1" value="1">
+                            <button class="option2">Add to Cart</button>
+                         </div>
                      </div>
                   </div>
                   <div class="img-box">
