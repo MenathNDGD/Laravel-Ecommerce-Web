@@ -43,6 +43,8 @@ route::get('/', [HomeController::class, 'index']);
 
 route::get('/product_details/{id}', [HomeController::class, 'product_details']);
 
+route::post('/add_cart/{id}', [HomeController::class, 'add_cart']);
+
 # Admin Controller Routes
 route::get('/view_category', [AdminController::class, 'view_category']);
 
