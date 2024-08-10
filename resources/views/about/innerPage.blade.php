@@ -3,7 +3,7 @@
        <div class="row">
           <div class="col-md-12">
              <div class="full">
-                <h3>About us</h3>
+                <h3>About Us</h3>
              </div>
           </div>
        </div>
