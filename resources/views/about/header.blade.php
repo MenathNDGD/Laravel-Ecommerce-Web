@@ -27,8 +27,13 @@
                    <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="">Cart</a>
-               </li>
+                  <a class="nav-link" href="{{ url('/show_cart') }}">
+                    Cart 
+                    @if(isset($cartCount) && $cartCount > 0)
+                      <span class="badge badge-pill badge-dark">{{ $cartCount }}</span>
+                    @endif
+                  </a>
+                </li> 
                 <form class="form-inline">
                   <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
@@ -55,3 +60,14 @@
        </nav>
     </div>
  </header>
+
+<style>
+   .nav-link {
+      display: flex;
+      align-items: center;
+   }
+
+   .badge {
+      margin-left: 5px;
+   }
+</style>
