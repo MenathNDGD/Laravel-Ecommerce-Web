@@ -129,6 +129,19 @@
             Our <span>Products</span>
          </h2>
       </div>
+      @if (session()->has('message'))
+            <div class="alert alert-success">
+                <button 
+                    type="button" 
+                    class="close" 
+                    data-dismiss="alert" 
+                    aria-hidden="true"
+                >
+                    x
+                </button>
+                {{session()->get('message')}}
+            </div>
+        @endif
       <div class="row">
 
          @foreach($product as $product)
@@ -140,10 +153,13 @@
                          <a href="{{url('product_details', $product->id)}}" class="option1">
                              {{$product->title}}
                          </a>
-                         <div class="input-group">
-                            <input type="number" class="amountAdd" min="1" value="1">
-                            <button class="option2">Add to Cart</button>
-                         </div>
+                         <form action="{{url('add_cart', $product->id)}}" method="POST">
+                           @csrf
+                           <div class="input-group">
+                              <input type="number" class="amountAdd" name="quantity" min="1" value="1">
+                              <button class="option2">Add to Cart</button>
+                           </div>
+                         </form>
                      </div>
                   </div>
                   <div class="img-box">
