@@ -14,23 +14,40 @@ class HomeController extends Controller
     {
         $product = Product::paginate(3);
 
-        return view('home.userpage', compact('product'));
+        $cartCount = 0;
+
+        if (Auth::check()) 
+        {
+            $id = Auth::user()->id;
+
+            $cartCount = Cart::where('user_id', '=', $id)->count();
+        }
+
+        return view('home.userpage', compact('product', 'cartCount'));
     }
 
     public function redirect()
     {
         $usertype = Auth::user()->usertype;
 
+        $cartCount = 0;
+
+        if (Auth::check()) 
+        {
+            $id = Auth::user()->id;
+
+            $cartCount = Cart::where('user_id', '=', $id)->count();
+        }
+
         if ($usertype == '1')
         {
             return view('admin.home');
-
         } 
         else 
         {
             $product = Product::paginate(3);
 
-            return view('home.userpage', compact('product'));
+            return view('home.userpage', compact('product', 'cartCount'));
         }
     }
 
@@ -81,5 +98,32 @@ class HomeController extends Controller
         {
             return redirect('login');
         }
+    }
+
+    public function show_cart()
+    {
+        if (Auth::id())
+        {
+            $id = Auth::user()->id;
+
+            $cart = Cart::where('user_id', '=', $id)->get();
+
+            $cartCount = $cart->count();
+
+            return view('home.show_cart', compact('cart', 'cartCount'));
+        }
+        else
+        {
+            return redirect('login');
+        }
+    }
+
+    public function remove_cart($id)
+    {
+        $cart = Cart::find($id);
+
+        $cart->delete();
+
+        return redirect()->back()->with('message', 'Product Item Removed Successfully');
     }
 }
