@@ -158,7 +158,7 @@
         text-decoration: none;
         border-radius: 50px;
         transition: background 0.3s ease, transform 0.3s ease;
-        margin-bottom: 20px;
+        margin-top: 30px;
     }
 
     .go-back-btn:hover {
@@ -218,14 +218,14 @@
          <header class="header_section">
             <div class="container">
                <nav class="navbar navbar-expand-lg custom_nav-container ">
-                  <a class="navbar-brand" href="/redirect"><img width="250" src="images/logo.png" alt="#" /></a>
+                  <a class="navbar-brand" href="{{ url('/') }}"><img width="250" src="images/logo.png" alt="#" /></a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class=""> </span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      <ul class="navbar-nav">
                         <li class="nav-item">
-                           <a class="nav-link" href="/redirect">Home <span class="sr-only">(current)</span></a>
+                           <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
                         </li>
                        <li class="nav-item dropdown">
                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Pages <span class="caret"></span></a>
@@ -286,6 +286,7 @@
            </div>
         </div>
      </section>
+
      <!-- end inner page section -->
      <section class="product_section layout_padding">
         <div class="container">
@@ -297,65 +298,79 @@
         </div>
       </section>
 
-      <div class="container-center">
-        <a href="javascript:history.back()" class="go-back-btn">Go Back</a>
-      <div class="col-sm-6 col-md-4 col-lg-4">
-          <div class="box">
-              
-              <div class="img-box">
-                  <img src="product/{{$product->image}}" alt="">
-              </div>
-              <div class="detail-box">
-                  <h5>
-                        {{$product->title}}
-                  </h5>
-
-                  <h6>
-                        {{$product->description}}
-                  </h6>
-                  
-                  @if ($product->discount_price != null)
-                      <h6>
-                            Discount Price: ${{$product->discount_price}}
-                      </h6>
-
-                      <h6 class="normal_price">
-                            Normal Price: ${{$product->price}}
-                      </h6>
-
-                  @else
-
-                      <h6>
-                            Price: ${{$product->price}}
-                      </h6>
-                  @endif
-                    
-                    <h6>
-                        Category: {{$product->category}}
-                    </h6>
-
-                    <h6>
-                        Available: {{$product->quantity}}
-                    </h6>
-              </div>
-
-              <div class="option_container">
-                <div class="options">
-                    <form action="{{url('add_cart', $product->id)}}" method="POST">
-
-                        @csrf
-
-                        <div class="row">
-                           <div class="col-md-4">
-                              <input type="number" name="quantity" value="1" min="1" class="amountAdd">
-                           </div>
-                           <div class="col-md-4">
-                              <input type="submit" class="option2" value="Add to Cart">
-                           </div>
-                        </div>
-                    </form>
-                </div>
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                <button 
+                    type="button" 
+                    class="close" 
+                    data-dismiss="alert" 
+                    aria-hidden="true"
+                >
+                    x
+                </button>
+                {{session()->get('message')}}
             </div>
+        @endif
+
+      <div class="container-center">
+
+        <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="box">
+                
+                <div class="img-box">
+                    <img src="product/{{$product->image}}" alt="">
+                </div>
+                <div class="detail-box">
+                    <h5>
+                            {{$product->title}}
+                    </h5>
+
+                    <h6>
+                            {{$product->description}}
+                    </h6>
+                    
+                    @if ($product->discount_price != null)
+                        <h6>
+                                Discount Price: ${{$product->discount_price}}
+                        </h6>
+
+                        <h6 class="normal_price">
+                                Normal Price: ${{$product->price}}
+                        </h6>
+
+                    @else
+
+                        <h6>
+                                Price: ${{$product->price}}
+                        </h6>
+                    @endif
+                        
+                        <h6>
+                            Category: {{$product->category}}
+                        </h6>
+
+                        <h6>
+                            Available: {{$product->quantity}}
+                        </h6>
+                </div>
+
+                <div class="option_container">
+                    <div class="options">
+                        <form action="{{url('add_cart', $product->id)}}" method="POST">
+
+                            @csrf
+
+                            <div class="row">
+                            <div class="col-md-4">
+                                <input type="number" name="quantity" value="1" min="1" class="amountAdd">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="submit" class="option2" value="Add to Cart">
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
               @if ($product->discount_price != null)
                   <div class="save">
@@ -370,6 +385,7 @@
               @endif
           </div>
       </div>
+      <a href="javascript:history.back()" class="go-back-btn">Go Back</a>
     </div>
 </div>
       <!-- footer start -->
