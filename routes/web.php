@@ -65,6 +65,10 @@ route::get('/delivered/{id}', [AdminController::class, 'delivered']);
 
 route::get('/order_detail_pdf/{id}', [AdminController::class, 'order_detail_pdf']);
 
+route::get('/send_email/{id}', [AdminController::class, 'send_email']);
+
+route::post('/send_user_email/{id}', [AdminController::class, 'send_user_email']);
+
 # Home Controller Routes
 route::get('redirect', [HomeController::class, 'redirect']);
 
