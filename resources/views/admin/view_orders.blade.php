@@ -95,6 +95,7 @@
                                 <th>Delivery Status</th>
                                 <th>Action</th>
                                 <th>PDF</th>
+                                <th>Send Email</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -126,11 +127,13 @@
                                 <td>
                                     <a href="{{url('order_detail_pdf', $order->id)}}" class="btn btn-success">Download PDF</a>
                                 </td>
+                                <td><a href="{{ url('send_email', $order->id) }}" class="btn btn-info">Send</a></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+                @include('admin.footer')
             </div>
             <!-- main-panel ends -->
         </div>
