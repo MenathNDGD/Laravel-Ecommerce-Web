@@ -59,6 +59,12 @@ route::get('/update_product/{id}', [AdminController::class, 'update_product']);
 
 route::post('/update_product_confirm/{id}', [AdminController::class, 'update_product_confirm']);
 
+route::get('/view_orders', [AdminController::class, 'view_orders']);
+
+route::get('/delivered/{id}', [AdminController::class, 'delivered']);
+
+route::get('/order_detail_pdf/{id}', [AdminController::class, 'order_detail_pdf']);
+
 # Home Controller Routes
 route::get('redirect', [HomeController::class, 'redirect']);
 
