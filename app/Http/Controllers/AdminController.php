@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -110,5 +112,34 @@ class AdminController extends Controller
         $product->save();
 
         return redirect('view_product')->with('message', 'Product Update Successfully');
+    }
+
+    public function view_orders()
+    {
+        $order = Order::all();
+
+        return view('admin.view_orders', compact('order'));
+    }
+
+    public function delivered($id)
+    {
+        $order = Order::find($id);
+
+        $order->delivery_status = "Delivered";
+
+        $order->payment_status = "Paid";
+
+        $order->save();
+
+        return redirect()->back();
+    }
+
+    public function order_detail_pdf($id)
+    {
+        $order = Order::find($id);
+
+        $pdf = PDF::loadView('admin.orderPDF', compact('order'));
+
+        return $pdf->download('order_' . $id . '_details' . '.pdf');
     }
 }
