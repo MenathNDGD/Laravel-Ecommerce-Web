@@ -158,6 +158,7 @@
                           name="category_name" 
                           class="input_color" 
                           placeholder="Add a Category Name"
+                          required
                         >
                         <input 
                           type="submit" 
