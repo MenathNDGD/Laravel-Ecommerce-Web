@@ -3,6 +3,47 @@
 <head>
     @include('admin.css')
     <style>
+        .content-wrapper form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .content-wrapper input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px 0 0 5px;
+            border: 1px solid #ddd;
+            border-right: none;
+            outline: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .content-wrapper input[type="text"]:focus {
+            border-color: #4caf50;
+            color: #333;
+        }
+
+        .content-wrapper input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4caf50;
+            border: 1px solid #4caf50;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .content-wrapper input[type="submit"]:hover {
+            background-color: #45a049;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         .content-wrapper {
             padding: 20px;
         }
@@ -65,7 +106,41 @@
             font-size: 28px;
             color: #4caf50;
             transition: transform 0.2s, color 0.2s;
-        }        
+        }
+
+        .empty-data-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 20px;
+            color: #ff6347;
+            background-color: #fff8f8;
+            border: 1px solid #ff6347;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .viewOrders {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .viewOrders .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4caf50;
+            border: 1px solid #4caf50;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .viewOrders .btn:hover {
+            background-color: #45a049;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
     </style>
 </head>
 <body>
@@ -80,6 +155,13 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <h1>All Orders</h1>
+                    <div>
+                        <form action="{{ url('search') }}" method="GET">
+                            @csrf
+                            <input type="text" name="search" placeholder="Search for Items..." value="{{ old('search', isset($searchText) ? $searchText : '') }}">
+                            <input type="submit" value="Search" class="btn btn-outline-primary">
+                        </form>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -95,11 +177,11 @@
                                 <th>Delivery Status</th>
                                 <th>Action</th>
                                 <th>PDF</th>
-                                <th>Send Email</th>
+                                <th>Email</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($order as $order)
+                            @forelse($order as $order)
                             <tr>
                                 <td>{{$order->name}}</td>
                                 <td>{{$order->email}}</td>
@@ -129,9 +211,22 @@
                                 </td>
                                 <td><a href="{{ url('send_email', $order->id) }}" class="btn btn-info">Send</a></td>
                             </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="13">
+                                        <div class="empty-data-message">
+                                            <p>No Data Found</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
+                    @if(isset($searchText))
+                        <div class="viewOrders">
+                            <a href="{{ url('/view_orders') }}" class="btn btn-primary">View All Orders</a>
+                        </div>
+                    @endif
                 </div>
                 @include('admin.footer')
             </div>
