@@ -69,8 +69,10 @@ route::get('/send_email/{id}', [AdminController::class, 'send_email']);
 
 route::post('/send_user_email/{id}', [AdminController::class, 'send_user_email']);
 
+route::get('/search', [AdminController::class, 'search']);
+
 # Home Controller Routes
-route::get('redirect', [HomeController::class, 'redirect']);
+route::get('/redirect', [HomeController::class, 'redirect']);
 
 route::get('/', [HomeController::class, 'index']);
 
