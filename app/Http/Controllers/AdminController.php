@@ -169,4 +169,19 @@ class AdminController extends Controller
 
         return redirect()->back()->with('message', 'Email Sent Successfully');
     }
+
+    public function search(Request $request)
+    {
+        $searchText = $request->input('search');
+
+        $order = Order::where('name', 'LIKE', "%$searchText%")
+                        ->orWhere('product_title', 'LIKE', "%$searchText%")
+                        ->orWhere('email', 'LIKE', "%$searchText%")
+                        ->orWhere('payment_status', 'LIKE', "%$searchText%")
+                        ->orWhere('delivery_status', 'LIKE', "%$searchText%")
+                        ->get();
+
+        return view('admin.view_orders', compact('order'))->with('searchText', $searchText ?? '');
+
+    }
 }
