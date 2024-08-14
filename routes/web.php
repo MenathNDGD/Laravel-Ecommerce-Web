@@ -95,6 +95,10 @@ route::get('/my_orders', [HomeController::class, 'my_orders']);
 
 route::get('/cancel_order/{id}', [HomeController::class, 'cancel_order']);
 
+route::post('/add_comment', [HomeController::class, 'add_comment']);
+
+route::post('/add_reply', [HomeController::class, 'add_reply']);
+
 # Product Controller Routes
 Route::get('/products', [ProductController::class, 'showAllProducts']);
 
