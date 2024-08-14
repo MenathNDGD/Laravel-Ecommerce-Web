@@ -19,7 +19,7 @@ class HomeController extends Controller
 
         $cartCount = 0;
 
-        if (Auth::check()) 
+        if (Auth::id())
         {
             $id = Auth::user()->id;
 
@@ -35,7 +35,7 @@ class HomeController extends Controller
 
         $cartCount = 0;
 
-        if (Auth::check()) 
+        if (Auth::id()) 
         {
             $id = Auth::user()->id;
 
@@ -44,7 +44,23 @@ class HomeController extends Controller
 
         if ($usertype == '1')
         {
-            return view('admin.home');
+            $totalProducts = Product::all()->count();
+            $totalOrders = Order::all()->count();
+            $totalUsers = User::all()->count();
+
+            $order = Order::all();
+
+            $totalRevenue = 0;
+
+            foreach ($order as $order)
+            {
+                $totalRevenue = $totalRevenue + $order->price;
+            }
+
+            $totalOrdersDelivered = Order::where('delivery_status', '=', 'Delivered')->get()->count();
+            $totalOrdersPending = Order::where('delivery_status', '=', 'Processing')->get()->count();
+
+            return view('admin.home', compact('totalProducts', 'totalOrders', 'totalUsers', 'totalRevenue', 'totalOrdersDelivered', 'totalOrdersPending'));
         } 
         else 
         {
@@ -220,6 +236,35 @@ class HomeController extends Controller
 
         Session::flash('success', 'Payment Successful');
               
+        return redirect()->back();
+    }
+
+    public function my_orders()
+    {
+        if (Auth::id())
+        {
+            $user = Auth::user();
+
+            $userid = $user->id;
+
+            $order = Order::where('user_id', '=', $userid)->get();
+
+            return view('home.myOrders', compact('order'));
+        }
+        else
+        {
+            return redirect('login');
+        }
+    }
+
+    public function cancel_order($id)
+    {
+        $order = Order::find($id);
+
+        $order->delivery_status = 'You Canceled the Order';
+
+        $order->save();
+
         return redirect()->back();
     }
 }
