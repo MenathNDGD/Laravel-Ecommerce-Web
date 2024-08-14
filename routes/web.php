@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthenticatedSessionController;
 
 # Navigation Routes
 Route::middleware([
@@ -90,6 +91,10 @@ route::get('/stripe/{totalPrice}', [HomeController::class, 'stripe']);
 
 Route::post('stripe/{totalPrice}', [HomeController::class, 'stripePost'])->name('stripe.post');
 
+route::get('/my_orders', [HomeController::class, 'my_orders']);
+
+route::get('/cancel_order/{id}', [HomeController::class, 'cancel_order']);
+
 # Product Controller Routes
 Route::get('/products', [ProductController::class, 'showAllProducts']);
 
@@ -104,3 +109,6 @@ Route::get('/blog', [BlogController::class, 'showBlogPage']);
 
 # Contact Controller Routes
 Route::get('/contact', [ContactController::class, 'showContactPage']);
+
+# Authenticated Session Controller Routes
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
