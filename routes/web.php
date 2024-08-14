@@ -102,6 +102,8 @@ route::post('/add_reply', [HomeController::class, 'add_reply']);
 # Product Controller Routes
 Route::get('/products', [ProductController::class, 'showAllProducts']);
 
+route::get('/search_product', [ProductController::class, 'search_product']);
+
 # About Controller Routes
 Route::get('/about', [AboutController::class, 'showAboutPage']);
 
