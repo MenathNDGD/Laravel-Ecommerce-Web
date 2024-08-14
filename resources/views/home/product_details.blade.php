@@ -244,7 +244,15 @@
                            <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="">Cart</a>
+                            <a class="nav-link" href="{{ url('/show_cart') }}">
+                              Cart 
+                              @if(isset($cartCount) && $cartCount > 0)
+                                <span class="badge badge-pill badge-dark">{{ $cartCount }}</span>
+                              @endif
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/my_orders') }}">Orders</a>
                         </li>
                         <form class="form-inline">
                           <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
@@ -254,9 +262,22 @@
         
                         @if (Route::has('login'))
                           @auth
-                             <li class="nav-item">
-                                <x-app-layout></x-app-layout>
-                             </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('/dashboard') }}">
+                                    Profile
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
+                                        Logout
+                                    </button>
+                                </form>
+                                </div>
+                            </li>
                           @else
                              <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">Login</a>
