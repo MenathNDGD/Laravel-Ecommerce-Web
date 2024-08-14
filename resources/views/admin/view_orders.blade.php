@@ -58,6 +58,7 @@
 
         .content-wrapper table {
             width: 100%;
+            table-layout: auto;
             border-collapse: collapse;
             margin-bottom: 20px;
             background-color: #fff;
@@ -68,7 +69,8 @@
         }
 
         th, td {
-            padding: 15px;
+            padding: 10px;
+            font-size: 14px;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
@@ -76,8 +78,8 @@
         th {
             background-color: #3535355d;
             color: #333;
-            font-weight: bold;
-            font-size: 20px;
+            font-weight: 800;
+            font-size: 16px;
             text-align: center;
         }
 
@@ -141,6 +143,12 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
+        th:nth-child(11), td:nth-child(11), /* Action Column */
+        th:nth-child(12), td:nth-child(12), /* PDF Column */
+        th:nth-child(13), td:nth-child(13) { /* Email Column */
+            width: 120px; /* Adjust width as necessary */
+            white-space: nowrap; /* Prevent wrapping */
+        }
     </style>
 </head>
 <body>
