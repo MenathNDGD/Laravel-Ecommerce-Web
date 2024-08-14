@@ -13,6 +13,7 @@ class AuthenticatedSessionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
+    
     public function destroy(Request $request)
     {
         Auth::logout();
@@ -22,6 +23,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         // Redirect to the login page
-        return redirect('/login');
+        return redirect('/');
     }
 }
