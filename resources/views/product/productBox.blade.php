@@ -1,10 +1,4 @@
 <style>
-   .save {
-      text-align: right;
-      margin-top: 8px;
-      font-weight: 600;
-   }
-   
    .allProduct {
       margin: 0 auto;
    }
@@ -120,6 +114,48 @@
       font-weight: bold;
       margin-top: 0;
    }
+
+   .search-container {
+   text-align: center;
+   margin-bottom: 20px;
+}
+
+.search-input {
+   border: 1px solid #ccc;
+   border-radius: 30px;
+   padding: 10px 20px;
+   font-size: 16px;
+   width: 400px;
+   box-sizing: border-box;
+   outline: none;
+   transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+   border-color: #5cb85c;
+   box-shadow: 0 0 5px rgba(92, 184, 92, 0.5);
+}
+
+.search-button {
+   background-color: #5cb85c;
+   border: none;
+   border-radius: 30px;
+   color: #fff;
+   font-size: 16px;
+   padding: 10px 20px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+   margin-left: 10px;
+}
+
+.search-button:hover {
+   background-color: #4cae4c;
+}
+
+.search-button:active {
+   background-color: #39843c;
+}
+
 </style>
 
 <section class="product_section layout_padding">
@@ -128,6 +164,13 @@
          <h2>
             Our <span>Products</span>
          </h2>
+         <div class="search-container">
+            <form action="{{ url('search_product') }}" method="GET">
+               @csrf
+               <input type="text" name="search" placeholder="Search for Products..." class="search-input">
+               <input type="submit" value="Search" class="search-button">
+            </form>
+         </div>         
       </div>
       @if (session()->has('message'))
             <div class="alert alert-success">
