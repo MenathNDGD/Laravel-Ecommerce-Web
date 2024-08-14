@@ -20,6 +20,8 @@
       <link href="home/css/style.css" rel="stylesheet" />
       <!-- responsive style -->
       <link href="home/css/responsive.css" rel="stylesheet" />
+      <!-- JavaScript CDN -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    </head>
    <body>
       <div class="hero_area">
@@ -41,6 +43,10 @@
       <!-- product section -->
       @include('home.product')
       <!-- end product section -->
+
+      <!-- comment and reply section -->
+      @include('home.comment')
+      <!-- end comment and reply section -->
 
       <!-- subscribe section -->
       @include('home.subscribe')
