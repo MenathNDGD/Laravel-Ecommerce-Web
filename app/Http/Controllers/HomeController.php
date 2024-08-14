@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Stripe;
 use App\Models\User;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -121,7 +122,9 @@ class HomeController extends Controller
 
             $cart->save();
 
-            return redirect()->back()->with('message', 'Product Added To The Cart Successfully');
+            Alert::success('Product Added To The Cart Successfully.', 'View Cart For More Details.');
+
+            return redirect()->back();
         }
         else
         {
