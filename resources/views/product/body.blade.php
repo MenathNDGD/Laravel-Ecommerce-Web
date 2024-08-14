@@ -22,6 +22,9 @@
       <link href="home/css/responsive.css" rel="stylesheet" />
    </head>
    <body class="sub_page">
+      <!-- sweet alert strats -->
+      @include('sweetalert::alert')
+      <!-- sweet alert ends -->
       <div class="hero_area">
          <!-- header section strats -->
          @include('product.header')
