@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Comment;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Reply;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -17,6 +19,10 @@ class HomeController extends Controller
     {
         $product = Product::paginate(3);
 
+        $comment = Comment::all();
+
+        $reply = Reply::all();
+
         $cartCount = 0;
 
         if (Auth::id())
@@ -26,7 +32,7 @@ class HomeController extends Controller
             $cartCount = Cart::where('user_id', '=', $id)->count();
         }
 
-        return view('home.userpage', compact('product', 'cartCount'));
+        return view('home.userpage', compact('product', 'cartCount', 'comment', 'reply'));
     }
 
     public function redirect()
@@ -66,7 +72,11 @@ class HomeController extends Controller
         {
             $product = Product::paginate(3);
 
-            return view('home.userpage', compact('product', 'cartCount'));
+            $comment = Comment::all();
+
+            $reply = Reply::all();
+
+            return view('home.userpage', compact('product', 'cartCount', 'comment', 'reply'));
         }
     }
 
@@ -266,5 +276,46 @@ class HomeController extends Controller
         $order->save();
 
         return redirect()->back();
+    }
+
+    public function add_comment(Request $request)
+    {
+        if (Auth::id())
+        {
+            $comment = new Comment;
+
+            $comment->name = Auth::user()->name;
+            $comment->user_id = Auth::user()->id;
+            $comment->comment = $request->comment;
+
+            $comment->save();
+
+            return redirect()->back();
+        }
+        else
+        {
+            return redirect('login');
+        }
+    }
+
+    public function add_reply(Request $request)
+    {
+        if (Auth::id())
+        {
+            $reply = new Reply;
+
+            $reply->name = Auth::user()->name;
+            $reply->user_id = Auth::user()->id;
+            $reply->comment_id = $request->commentId;
+            $reply->reply = $request->reply;
+
+            $reply->save();
+
+            return redirect()->back();
+        }
+        else
+        {
+            return redirect('login');
+        }
     }
 }
