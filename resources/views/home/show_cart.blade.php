@@ -20,6 +20,8 @@
    <link href="home/css/style.css" rel="stylesheet" />
    <!-- responsive style -->
    <link href="home/css/responsive.css" rel="stylesheet" />
+   <!-- sweet alert message cdn -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
    <style>
     .cart-table {
@@ -176,6 +178,9 @@
    </style>
 </head>
 <body>
+   <!-- sweet alert strats -->
+   @include('sweetalert::alert')
+   <!-- sweet alert ends -->
    <div class="hero_area">
       <!-- header section starts -->
       <header class="header_section">
@@ -297,7 +302,7 @@
                      <a 
                         class="btn btn-danger" 
                         href="{{url('/remove_cart', $cart->id)}}"
-                        onclick="return confirm('Are you sure to remove this item?')"
+                        onclick="confirmation(event)"
                      >
                         Remove
                      </a>
@@ -328,6 +333,26 @@
          </p>
       </div>
    </div>
+
+   <script>
+      function confirmation(ev) {
+        ev.preventDefault();
+        var urlToRedirect = ev.currentTarget.getAttribute('href');  
+        console.log(urlToRedirect); 
+        swal({
+            title: "Are You Sure To Remove This Product From The Cart?",
+            text: "You Will Not Be Able To Revert This!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willCancel) => {
+            if (willCancel) {
+                window.location.href = urlToRedirect;  
+               }  
+        });
+      }
+   </script>
    <!-- jQery -->
    <script src="home/js/jquery-3.4.1.min.js"></script>
    <!-- popper js -->
